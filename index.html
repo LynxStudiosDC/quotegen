@@ -89,7 +89,7 @@
 <div class="container">
     <div class="qr-maker">
         <h1>InstaQR</h1>
-        <input type="text" id="qr-input" placeholder="Enter text or URL">
+        <input type="text" id="qr-input" placeholder="Enter URL">
         <button onclick="generateQR()">Generate QR Code</button>
         <div id="qrcode"></div>
     </div>
@@ -100,7 +100,7 @@
     function generateQR() {
         const input = document.getElementById('qr-input').value;
         if (!input) {
-            alert('Please enter some text or URL');
+            alert('Please enter a URL');
             return;
         }
 
