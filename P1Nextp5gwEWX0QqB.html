@@ -1,0 +1,115 @@
+<html><head><base href="https://qr-code-maker.example.com/">
+<title>QR Code Maker with Cool Background</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: linear-gradient(45deg, #12c2e9, #c471ed, #f64f59);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+    }
+    @keyframes gradientBG {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+    .qr-maker {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        text-align: center;
+    }
+    h1 {
+        color: #333;
+        margin-bottom: 1.5rem;
+    }
+    input {
+        width: 100%;
+        padding: 0.8rem;
+        margin: 1rem 0;
+        border: none;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.8);
+        font-size: 1rem;
+    }
+    button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+    button:hover {
+        background-color: #45a049;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    #qrcode {
+        margin-top: 1.5rem;
+    }
+    #qrcode img {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+</head>
+<body>
+<div class="background"></div>
+<div class="container">
+    <div class="qr-maker">
+        <h1>QR Code Maker</h1>
+        <input type="text" id="qr-input" placeholder="Enter text or URL">
+        <button onclick="generateQR()">Generate QR Code</button>
+        <div id="qrcode"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+<script>
+    function generateQR() {
+        const input = document.getElementById('qr-input').value;
+        if (!input) {
+            alert('Please enter some text or URL');
+            return;
+        }
+
+        const qr = qrcode(0, 'M');
+        qr.addData(input);
+        qr.make();
+
+        const qrCodeDiv = document.getElementById('qrcode');
+        qrCodeDiv.innerHTML = qr.createImgTag(5, 10, "QR code for: " + input);
+    }
+</script>
+</body></html>
